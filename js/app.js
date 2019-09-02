@@ -3,7 +3,7 @@ var map;
 var styleTerrain = {};
 styleTerrain.exaggeration= 1.0;
 styleTerrain.highlight="#fffcd6";
-styleTerrain.shadow="#11001a";
+styleTerrain.shadow="#040f55";
 styleTerrain.accent="#1b0029";
 styleTerrain.illumination=315;
 
