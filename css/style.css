@@ -1,0 +1,160 @@
+#zoneStatic {
+    
+    /* top: 10px; */
+    /* left: 10px; */
+    width: 150px;
+    height: 150px;
+    /* background-color: #f9f5f5; */
+    opacity: 0.95;
+    border-radius: 20px;
+
+}
+#panel {
+
+    position: absolute;
+    width: 320px;
+    max-height: 733px;
+    background-color: #efefef;
+    /* top: 5px; */
+    left: 5px;
+    border-radius: 10px;
+    overflow-y: auto;
+
+}
+
+#data {
+
+    position: relative;
+    top: 133px;
+    padding: 8px;
+    padding-left: 15px;
+    /* text-align: center; */
+    font-size: 0.9em;
+
+}
+
+.optcolor{
+
+    width: 40px;
+    font-size: 0.8em;
+
+}
+#data div {
+
+padding-bottom: 5px;
+
+}
+#data input{
+
+    width: 40px;
+    font-size: 0.8em;
+}
+button{
+
+    height: 28px; 
+    width: 28px;
+    border: 1px solid white;
+    cursor:pointer;
+    margin-top: 3px;
+}
+
+.textR {
+
+    text-align: right;
+}
+
+.marge {
+
+    margin-bottom: 4px !important;
+}
+
+.marge-left {
+
+    margin-bottom: 4px !important;
+}
+
+small {
+    font-size: 0.75em;
+  }
+
+  .social_in {
+    position: relative;
+    float: right;
+    top: -18px;
+  }
+  .social_out {
+    position: fixed;
+    bottom: 2px;
+    left: 5px;
+    display: none;
+    z-index: 100;
+  }
+
+  .icgclogo {    
+    width: 30px;
+    height: 30px;
+    display: block;
+    background-size: contain;
+    background-position: center;
+    background-image: url("./ICGC_logo.svg");
+}
+
+.mm {
+
+    background-color: #eeeeee !important;
+    border: 0px !important;
+    margin: 0px !important;
+}
+
+.mm div {
+
+    background-color: #eeeeee !important;
+    border: 0px !important;
+}
+
+#mygrid {
+    position: absolute;
+    top: 40px;
+    z-index: 1000;
+    width: 279px;
+    height: auto;
+    left: 17px;
+    background-color: #f5f5f5;
+    padding: 10px;
+    max-height: 300px;
+    overflow: auto;
+    font-size: 0.9em;
+    display: none;
+    box-shadow: 1px 1px 1px #e3e8e7;
+  }
+  
+  #mygrid li a {
+    color: #333 !important;
+    text-decoration: none !important;
+  }
+  
+  #mygrid li a:hover {
+    color: #333 !important;
+    text-decoration: none !important;
+  }
+
+
+  @media only screen and (max-width: 600px) {
+
+    #panel {
+        position: absolute;
+        width: 100%;
+        /* max-height: 733px; */
+        background-color: #efefef;
+        bottom: 0px;
+        left: 0px;
+        /* border-radius: 10px; */
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 200px;
+        z-index: 10;
+        margin: 0px !important;
+        font-size: 0.8em !important;
+    }
+
+  }

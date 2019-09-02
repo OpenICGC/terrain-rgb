@@ -1,2 +1,8 @@
-# terrain-rgb
-ICGC Terrain RGB 2m
+# Ombrejat dinàmic
+
+## Crea visualitzacions realistes del terreny
+
+
+### Demo
+http://betaserver.icgc.cat/terrain-rgb/
+
