@@ -1,18 +1,19 @@
 var static;
 var map;
 var styleTerrain = {};
-styleTerrain.exaggeration= 1.0;
-styleTerrain.highlight="#fffcd6";
-styleTerrain.shadow="#040f55";
-styleTerrain.accent="#1b0029";
-styleTerrain.illumination=315;
+styleTerrain.exaggeration = 1.0;
+styleTerrain.highlight = "#fffcd6";
+styleTerrain.shadow = "#040f55";
+styleTerrain.accent = "#1b0029";
+styleTerrain.illumination = 315;
+styleTerrain.background = "#F4F9F4";
 
 function init() {
 
 
-     map = new mapboxgl.Map({
+    map = new mapboxgl.Map({
         container: 'map',
-        minZoom: 5,
+        minZoom: 2,
         maxZoom: 18,
         hash: true,
         style: 'https://geoserveis.icgc.cat/contextmaps/icgc.json',
@@ -22,8 +23,11 @@ function init() {
 
 
 
-  //  map.dragRotate.disable();
-   // map.touchZoomRotate.disableRotation();
+    map.addControl(new mapboxgl.NavigationControl());
+
+
+    //  map.dragRotate.disable();
+    // map.touchZoomRotate.disableRotation();
 
     map.on('load', function () {
 
@@ -33,6 +37,7 @@ function init() {
                 "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"
             ],
             "tileSize": 256,
+            //"url":"https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png",
             "encoding": "terrarium",
             "maxzoom": 16
         });
@@ -40,7 +45,8 @@ function init() {
             "type": "raster-dem",
             "tiles": ["https://tilemaps.icgc.cat/tileserver/tileserver.php/terreny_icgc_2m_rgb/{z}/{x}/{y}.png"],
             "tileSize": 256,
-            "maxzoom": 16
+            "maxzoom": 16,
+            "minZoom": 7.5,
         });
 
         map.addLayer({
@@ -81,7 +87,7 @@ function init() {
     });
 
 
-     static = nipplejs.create({
+    static = nipplejs.create({
         zone: document.getElementById('static'),
         mode: 'static',
         position: { left: '50%', top: '50%' },
@@ -114,10 +120,14 @@ function init() {
 
 
     initLlocs('#controlbox');
-    $("#estilJSON").on("click", function(){
-       
+    $("#estilJSON").on("click", function () {
         showEstil();
-    })
+    });
+    $('#bt_capture').on('click', function () {
+        $('#md_print').modal({
+          show: true
+        });
+      });
 }
 
 function setShadowColor(picker) {
@@ -144,6 +154,13 @@ function setAccentColor(picker) {
     styleTerrain.accent = '#' + picker.toString();
 }
 
+function setBackgroundColor(picker) {
+
+    document.getElementById("backgroundColor").value = '#' + picker.toString();
+    map.setPaintProperty('background', 'background-color', '#' + picker.toString());
+   
+    styleTerrain.background = '#' + picker.toString();
+}
 
 
 function showEstil() {
@@ -153,74 +170,77 @@ function showEstil() {
 
 }
 
-function writeStyle(){
+function writeStyle() {
 
-const style ={
-    "version": 8,
-    "name": "terrainrgb",
-    "center": [map.getCenter().lng,map.getCenter().lat],
-    "zoom": map.getZoom(),
-    "sources": {     
-         "terrainICGC": {
-            "type": "raster-dem",
-            "tiles": [
-                "https://tilemaps.icgc.cat/tileserver/tileserver.php/terreny_icgc_2m_rgb/{z}/{x}/{y}.png"
-            ],            
-            "maxzoom": 16
-        },
-        
-        "terrainMapZen": {
-            "type": "raster-dem",
-            "tiles": [
-                "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"
-            ],
-            "tileSize": 256,
-            "encoding":"terrarium",
-            "maxzoom": 16
-        }
-    },
-    "sprite": "https://tilemaps.icgc.cat/tileserver/sprites/maki",
-    "glyphs": "https://tilemaps.icgc.cat/tileserver/glyphs/{fontstack}/{range}.pbf",
-    "layers": [
-        {
-            "id": "background",
-            "type": "background",
-            "paint": {"background-color": "#F4F9F4"}
-        },
-        {
-            "id": "terrainMapZen",
-            "type": "hillshade",
-            "source": "terrainMapZen",
-            "layout": {"visibility": "visible"},
-            "paint": {
-                "hillshade-illumination-anchor": "map",
-                "hillshade-exaggeration":styleTerrain.exaggeration,
-                "hillshade-highlight-color": styleTerrain.highlight,
-                "hillshade-shadow-color": styleTerrain.shadow,
-                "hillshade-accent-color": styleTerrain.accent,
-                "hillshade-illumination-direction":  styleTerrain.illumination
+    const style = {
+        "version": 8,
+        "name": "terrainrgb",
+        "center": [map.getCenter().lng, map.getCenter().lat],
+        "zoom": map.getZoom(),
+        "bearing": map.getBearing(),
+        "pitch": map.getPitch(),
+        "sources": {
+            "terrainICGC": {
+                "type": "raster-dem",
+                "tiles": [
+                    "https://tilemaps.icgc.cat/tileserver/tileserver.php/terreny_icgc_2m_rgb/{z}/{x}/{y}.png"
+                ],
+                "maxzoom": 16,
+              "minZoom": 7.5
             },
-            "interactive": true
-        },
-        {
-            "id": "terrainICGC",
-            "type": "hillshade",
-            "source": "terrainICGC",
-            "layout": {"visibility": "visible"},
-            "paint": {
-                "hillshade-illumination-anchor": "map",
-                "hillshade-exaggeration":styleTerrain.exaggeration,           
-                "hillshade-highlight-color":styleTerrain.highlight,                
-                "hillshade-shadow-color": styleTerrain.shadow,
-                "hillshade-accent-color": styleTerrain.accent,
-                "hillshade-illumination-direction": styleTerrain.illumination
-            },
-            "interactive": true
-        }
-    ]
-}
 
-$('#estilRGB').text(JSON.stringify(style, null, 2));
+            "terrainMapZen": {
+                "type": "raster-dem",
+                "tiles": [
+                    "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"
+                ],
+                "tileSize": 256,
+                "encoding": "terrarium",
+                "maxzoom": 16
+            }
+        },
+        "sprite": "https://tilemaps.icgc.cat/tileserver/sprites/maki",
+        "glyphs": "https://tilemaps.icgc.cat/tileserver/glyphs/{fontstack}/{range}.pbf",
+        "layers": [
+            {
+                "id": "background",
+                "type": "background",
+                "paint": { "background-color": styleTerrain.background }
+            },
+            {
+                "id": "terrainMapZen",
+                "type": "hillshade",
+                "source": "terrainMapZen",
+                "layout": { "visibility": "visible" },
+                "paint": {
+                    "hillshade-illumination-anchor": "map",
+                    "hillshade-exaggeration": styleTerrain.exaggeration,
+                    "hillshade-highlight-color": styleTerrain.highlight,
+                    "hillshade-shadow-color": styleTerrain.shadow,
+                    "hillshade-accent-color": styleTerrain.accent,
+                    "hillshade-illumination-direction": styleTerrain.illumination
+                },
+                "interactive": true
+            },
+            {
+                "id": "terrainICGC",
+                "type": "hillshade",
+                "source": "terrainICGC",
+                "layout": { "visibility": "visible" },
+                "paint": {
+                    "hillshade-illumination-anchor": "map",
+                    "hillshade-exaggeration": styleTerrain.exaggeration,
+                    "hillshade-highlight-color": styleTerrain.highlight,
+                    "hillshade-shadow-color": styleTerrain.shadow,
+                    "hillshade-accent-color": styleTerrain.accent,
+                    "hillshade-illumination-direction": styleTerrain.illumination
+                },
+                "interactive": true
+            }
+        ]
+    }
+
+    $('#estilRGB').text(JSON.stringify(style, null, 2));
 
 }
 
@@ -237,8 +257,8 @@ function debug(debug) {
         map.setPaintProperty('hillshading', 'hillshade-exaggeration', exa);
         map.setPaintProperty('hillshading2', 'hillshade-illumination-direction', parseInt(ilu));
         map.setPaintProperty('hillshading2', 'hillshade-exaggeration', exa);
-        styleTerrain.illumination =  parseInt(ilu);
-        styleTerrain.exaggeration =  exa;
+        styleTerrain.illumination = parseInt(ilu);
+        styleTerrain.exaggeration = exa;
         document.getElementById('ilu').innerHTML = "<b> " + parseInt(ilu) + "&deg;</b>";
         document.getElementById('exa').innerHTML = "<b> x" + (exa).toFixed(1) + "</b>";
 

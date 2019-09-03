@@ -9,14 +9,16 @@
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script
-    src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-    <script type="text/javascript" src="js/jscolor.js"></script>
-    <script type="text/javascript" src="js/nipplejs-custom.js"></script>
-    <script type="text/javascript" src="js/troba-llocs.js"></script>
+    <script type="text/javascript" src="./js/jscolor.js"></script>
+    <script type="text/javascript" src="./js/nipplejs-custom.js"></script>
+    <script type="text/javascript" src="./js/troba-llocs.js"></script>
+
+    <script type="text/javascript" src="./js/canvas-toBlob.js"></script>
+    <script type="text/javascript" src="./js/fileSaver.js"></script>
+    <script type="text/javascript" src="./js/print.js"></script>
 
     <style>
         body {
@@ -36,20 +38,28 @@
 </head>
 
 <body onLoad="init()">
-        <div class="ui modal">
-                <i class="close icon"></i>
-                
-                <div class="content">
-                        <div class="ui form">
-                                <div class="field">
-                                  <label>Estil terreny RGB</label>
-                                  <textarea id="estilRGB"></textarea>
-                                </div>
-                              </div>
+    <div class="ui modal">
+        <i class="close icon"></i>
+
+        <div class="content">
+            <div class="ui form">
+                <div class="field">
+                    <label>Estil terreny RGB</label>
+                    <textarea class="textarea" id="estilRGB"></textarea>
                 </div>
-                
+            </div>
         </div>
+
+    </div>
+    <div id="spinner"></div>
     <div id="map"></div>
+    <div id='barraEines' class="mapboxgl-ctrl-group mapboxgl-ctrl">
+        <button id="generate-btn" title="Capturar mapa" class="mapboxgl-ctrl-icon">
+            <i style="margin:0px" class="camera icon"></i>
+        </button>
+
+
+    </div>
     <div class="ui segment" id="panel">
         <h4 class="ui center  aligned block header">
 
@@ -60,19 +70,19 @@
                 </div>
             </div>
         </h4>
- 
-     
+
+
         <div class="ui one column grid">
             <div class="row">
-                <div  class="column">
+                <div class="column">
                     <!--
                     <div id="controlbox"></div>
                     -->
                     <div class="ui fluid icon input">
-                    <input id="searchboxinput" type="text" placeholder="Anar a...">
-                    <i class="search icon"></i>
+                        <input id="searchboxinput" type="text" placeholder="Anar a...">
+                        <i class="search icon"></i>
                     </div>
-                    <div id="mygrid"></div> 
+                    <div id="mygrid"></div>
                 </div>
                 <div class="column">
                     <div class="ui divider"></div>
@@ -109,7 +119,7 @@
 
                 <div class="column">
                     <div class="ui divider"></div>
-                  
+
                 </div>
 
                 <div class="column">
@@ -137,6 +147,12 @@
                                     class="jscolor {valueElement:'chosen-value', onFineChange:'setAccentColor(this)',value:'#1b0029'}">
                             </div>
 
+
+                            <div class="eight wide column textR">Fons:</div>
+                            <div class="two wide column">
+                                <button id="backgroundColor"
+                                    class="jscolor {valueElement:'chosen-value', onFineChange:'setBackgroundColor(this)',value:'#F4F9F4'}">
+                            </div>
                         </div>
 
 
@@ -147,10 +163,11 @@
                     <div class="ui divider"></div>
                 </div>
 
-                <div class="column">
-                    <button id="estilJSON" class="ui fluid button">
+                <div style="text-align: center;" class="column">
+                    <button id="estilJSON" class="ui basic orange button">
                         Veure estil JSON
                     </button>
+                    <i class="large info circle link blue icon"></i>
                 </div>
                 <div class="column">
                     <div class="ui divider"></div>
