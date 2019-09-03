@@ -22,8 +22,8 @@ function init() {
 
 
 
-    map.dragRotate.disable();
-    map.touchZoomRotate.disableRotation();
+  //  map.dragRotate.disable();
+   // map.touchZoomRotate.disableRotation();
 
     map.on('load', function () {
 
@@ -39,7 +39,7 @@ function init() {
         map.addSource("dem", {
             "type": "raster-dem",
             "tiles": ["https://tilemaps.icgc.cat/tileserver/tileserver.php/terreny_icgc_2m_rgb/{z}/{x}/{y}.png"],
-            //"tileSize": 512,
+            "tileSize": 256,
             "maxzoom": 16
         });
 
@@ -47,7 +47,7 @@ function init() {
             "id": "hillshading2",
             "source": "terrainMapZen",
             "type": "hillshade",
-            "maxzoom": 12,
+            "maxzoom": 13.5,
             "paint": {
                 "hillshade-illumination-direction": styleTerrain.illumination,
                 "hillshade-exaggeration": styleTerrain.exaggeration,
@@ -77,6 +77,7 @@ function init() {
         map.setPaintProperty('landcover-wood-copy', 'fill-opacity', 0.0);
         map.setPaintProperty('landcover-grass-copy', 'fill-opacity', 0.0);
         map.setPaintProperty('park-copy', 'fill-opacity', 0.0);
+        //map.showTileBoundaries = true;
     });
 
 

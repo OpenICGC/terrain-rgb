@@ -15,7 +15,7 @@
     width: 320px;
     max-height: 733px;
     background-color: #efefef;
-    /* top: 5px; */
+    
     left: 5px;
     border-radius: 10px;
     overflow-y: auto;
@@ -146,6 +146,11 @@ textarea {
     font-size: 1.2em;
 }
 
+#estilJSON {
+
+  line-height: 6px;
+}
+
   @media only screen and (max-width: 600px) {
 
     #panel {
@@ -162,6 +167,11 @@ textarea {
         z-index: 10;
         margin: 0px !important;
         font-size: 0.8em !important;
+    }
+
+    #opcions{
+
+      width:70% !important;
     }
 
   }

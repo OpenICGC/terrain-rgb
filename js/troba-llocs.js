@@ -1,15 +1,6 @@
 function initLlocs(container) {
 
    
-
-    $(container).html('<div>' +
-      '<div id="boxcontainer" class="searchbox searchbox-shadow">' +
-      '<div class="searchbox-menu-container">' +
-      '<div class="ui fluid icon input">' +
-      '<input id="searchboxinput" type="text" placeholder="Anar a...">' +
-      '<i class="search icon"></i>' +
-      '</div> </div>' +
-      '</div>');
   
   
     $(".searchbox-menu-container").on('click', function() {

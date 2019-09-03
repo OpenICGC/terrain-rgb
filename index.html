@@ -5,8 +5,8 @@
     <meta charset='utf-8' />
     <title>Catalunya Terrain-RGB</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script
@@ -51,7 +51,7 @@
         </div>
     <div id="map"></div>
     <div class="ui segment" id="panel">
-        <h3 class="ui center  aligned block header">
+        <h4 class="ui center  aligned block header">
 
             <div class="content">
                 Ombrejat dinàmic
@@ -59,13 +59,20 @@
                     Crea visualitzacions realistes del terreny
                 </div>
             </div>
-        </h3>
-
+        </h4>
+ 
+     
         <div class="ui one column grid">
             <div class="row">
                 <div  class="column">
-                <div id="controlbox"></div>
-                <div id="mygrid"></div>      
+                    <!--
+                    <div id="controlbox"></div>
+                    -->
+                    <div class="ui fluid icon input">
+                    <input id="searchboxinput" type="text" placeholder="Anar a...">
+                    <i class="search icon"></i>
+                    </div>
+                    <div id="mygrid"></div> 
                 </div>
                 <div class="column">
                     <div class="ui divider"></div>
@@ -102,6 +109,7 @@
 
                 <div class="column">
                     <div class="ui divider"></div>
+                  
                 </div>
 
                 <div class="column">
@@ -112,7 +120,7 @@
                 <div class="column">
 
                     <div class="ui grid">
-                        <div class="row">
+                        <div id="opcions" class="row">
                             <div class="eight wide column textR">Ombra:</div>
                             <div class="two wide column">
                                 <button id="shadowColor"
@@ -176,18 +184,10 @@
                             }(document, 'script', 'twitter-wjs');
                         </script>
                         <div>
-
-
                         </div>
-
-
                     </div>
-
                 </div>
                 <script type="text/javascript" src="js/app.js"></script>
-
-
-                
 
 </body>
 
