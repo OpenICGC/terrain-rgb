@@ -6,7 +6,7 @@ styleTerrain.highlight = "#fffcd6";
 styleTerrain.shadow = "#040f55";
 styleTerrain.accent = "#1b0029";
 styleTerrain.illumination = 315;
-styleTerrain.background = "#F4F9F4";
+styleTerrain.background = "#dbdfdb";
 
 function init() {
 
