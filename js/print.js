@@ -209,10 +209,18 @@ $(document).ready(function() {
           var format = $('input[name=outputOptions]:checked', '#config').val();
           var unit = $('input[name=unitOptions]:checked', '#config').val();
           */
-
+         var height =parseInt(Number(document.body.clientHeight)* 0.2645833333) + 5;
+         var width = parseInt(Number(document.body.clientWidth)* 0.2645833333) + 5;
+         /*
+         console.info(height);
+         console.info(width);
          var width = 280;
          var height = 200;   
-         var dpi = Number(300);
+        
+         console.info(height);
+        console.info(width);
+*/
+         var dpi = Number(96);
          var format = "png";
          var unit = "mm";
           var zoom = map.getZoom();

@@ -2,11 +2,11 @@ var static;
 var map;
 var styleTerrain = {};
 styleTerrain.exaggeration = 1.0;
-styleTerrain.highlight = "#fffcd6";
-styleTerrain.shadow = "#040f55";
-styleTerrain.accent = "#1b0029";
+styleTerrain.highlight = "#ecebc0";
+styleTerrain.shadow = "#474836";
+styleTerrain.accent = "#8a0000";
 styleTerrain.illumination = 315;
-styleTerrain.background = "#eff4ef";
+styleTerrain.background = "#d3e0d3";
 
 function init() {
 
@@ -17,8 +17,8 @@ function init() {
         maxZoom: 18,
         hash: true,
         style: 'https://geoserveis.icgc.cat/contextmaps/icgc.json',
-        center: [2.35694, 41.53262],
-        zoom: 12.65,
+        center: [1.88979,41.69589],
+        zoom: 13.61,
         attributionControl: false
     });
 
