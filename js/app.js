@@ -35,13 +35,18 @@ function init() {
 
     map.on('load', function () {
 
+
+        map.addSource("catPol", {
+            "type": "vector",
+            "url":"https://tilemaps.icgc.cat/tileserver/catpol_tilejson.json",
+            "maxzoom": 14
+        });
         map.addSource("terrainMapZen", {
             "type": "raster-dem",
             "tiles": [
                 "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"
             ],
             "tileSize": 256,
-            //"url":"https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png",
             "encoding": "terrarium",
             "maxzoom": 16
         });
@@ -58,6 +63,7 @@ function init() {
             "source": "terrainMapZen",
             "type": "hillshade",
             "maxzoom": 13.5,
+            "layout": { "visibility": "visible" },
             "paint": {
                 "hillshade-illumination-direction": styleTerrain.illumination,
                 "hillshade-exaggeration": styleTerrain.exaggeration,
@@ -81,6 +87,19 @@ function init() {
                 "hillshade-accent-color": styleTerrain.accent
             }
         }, "landcover-glacier");
+
+        map.addLayer({
+            "id": "catpol4326",
+            "source": "catPol",
+            "source-layer": "catpol4326",
+            "type": "fill",
+            "maxzoom": 18,
+            "paint": {
+                "fill-color": styleTerrain.background,
+                "fill-opacity": 1
+                        
+            }
+        }, "hillshading");
 
 
 
@@ -162,6 +181,7 @@ function setBackgroundColor(picker) {
 
     document.getElementById("backgroundColor").value = '#' + picker.toString();
     map.setPaintProperty('background', 'background-color', '#' + picker.toString());
+    map.setPaintProperty('catpol4326', 'fill-color', '#' + picker.toString());
    
     styleTerrain.background = '#' + picker.toString();
 }
