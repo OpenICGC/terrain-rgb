@@ -106,6 +106,8 @@ function init() {
         map.setPaintProperty('landcover-wood-copy', 'fill-opacity', 0.0);
         map.setPaintProperty('landcover-grass-copy', 'fill-opacity', 0.0);
         map.setPaintProperty('park-copy', 'fill-opacity', 0.0);
+        map.setPaintProperty('background', 'background-color', styleTerrain.background);
+        
         //map.showTileBoundaries = true;
     });
 
