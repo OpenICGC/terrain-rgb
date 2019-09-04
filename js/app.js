@@ -6,7 +6,7 @@ styleTerrain.highlight = "#fffcd6";
 styleTerrain.shadow = "#040f55";
 styleTerrain.accent = "#1b0029";
 styleTerrain.illumination = 315;
-styleTerrain.background = "#dbdfdb";
+styleTerrain.background = "#eff4ef";
 
 function init() {
 
@@ -19,7 +19,7 @@ function init() {
         style: 'https://geoserveis.icgc.cat/contextmaps/icgc.json',
         center: [2.35694, 41.53262],
         zoom: 12.65,
-        attributionControl:false
+        attributionControl: false
     });
 
 
@@ -38,7 +38,7 @@ function init() {
 
         map.addSource("catPol", {
             "type": "vector",
-            "url":"https://tilemaps.icgc.cat/tileserver/catpol_tilejson.json",
+            "url": "https://tilemaps.icgc.cat/tileserver/catpol_tilejson.json",
             "maxzoom": 14
         });
         map.addSource("terrainMapZen", {
@@ -97,7 +97,7 @@ function init() {
             "paint": {
                 "fill-color": styleTerrain.background,
                 "fill-opacity": 1
-                        
+
             }
         }, "hillshading");
 
@@ -148,9 +148,9 @@ function init() {
     });
     $('#bt_capture').on('click', function () {
         $('#md_print').modal({
-          show: true
+            show: true
         });
-      });
+    });
 }
 
 function setShadowColor(picker) {
@@ -182,7 +182,7 @@ function setBackgroundColor(picker) {
     document.getElementById("backgroundColor").value = '#' + picker.toString();
     map.setPaintProperty('background', 'background-color', '#' + picker.toString());
     map.setPaintProperty('catpol4326', 'fill-color', '#' + picker.toString());
-   
+
     styleTerrain.background = '#' + picker.toString();
 }
 
@@ -210,7 +210,7 @@ function writeStyle() {
                     "https://tilemaps.icgc.cat/tileserver/tileserver.php/terreny_icgc_2m_rgb/{z}/{x}/{y}.png"
                 ],
                 "maxzoom": 16,
-              "minZoom": 7.5
+                "minZoom": 7.5
             },
 
             "terrainMapZen": {
