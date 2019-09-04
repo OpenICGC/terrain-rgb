@@ -18,12 +18,16 @@ function init() {
         hash: true,
         style: 'https://geoserveis.icgc.cat/contextmaps/icgc.json',
         center: [2.35694, 41.53262],
-        zoom: 12.65
+        zoom: 12.65,
+        attributionControl:false
     });
 
 
 
     map.addControl(new mapboxgl.NavigationControl());
+    map.addControl(new mapboxgl.AttributionControl({
+        compact: true
+    }));
 
 
     //  map.dragRotate.disable();

@@ -13,13 +13,14 @@
 #panel {
 
   position: absolute;
-  width: 320px;
-  max-height: 733px;
+  width: 300px;
+  max-height: 90%;
   background-color: #efefef;
 
-  left: 5px;
-  border-radius: 10px;
+  left: 1px;
+  border-radius: 0px;
   overflow-y: auto;
+  margin:1px;
 
 }
 
@@ -59,7 +60,14 @@ button {
   width: 28px;
   border: 1px solid white;
   cursor: pointer;
+  /*
   margin-top: 3px;
+  */
+}
+.back {
+  background-size: contain;
+  background-position: center;
+  background-image: url("./round.png");
 }
 
 .textR {

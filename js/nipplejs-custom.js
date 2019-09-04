@@ -438,7 +438,7 @@ Nipple.prototype.stylize = function () {
         height: this.options.size + 'px',
         marginLeft: -this.options.size / 2 + 'px',
         marginTop: -this.options.size / 2 + 'px',
-        background: this.options.color,
+       // background: this.options.color,
         'opacity': '.9'
     };
 
