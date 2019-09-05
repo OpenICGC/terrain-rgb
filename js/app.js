@@ -53,7 +53,7 @@ function init() {
         map.addSource("dem", {
             "type": "raster-dem",
             "tiles": ["https://tilemaps.icgc.cat/tileserver/tileserver.php/terreny_icgc_2m_rgb/{z}/{x}/{y}.png"],
-            "tileSize": 256,
+            "tileSize": 512,
             "maxzoom": 16,
             "minZoom": 7.5,
         });
