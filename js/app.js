@@ -8,8 +8,8 @@ styleTerrain.accent = "#8a0000";
 styleTerrain.illumination = 315;
 styleTerrain.background = "#d3e0d3";
 
-function init() {
-
+//function init() {
+$(document).ready(function () {
 
     map = new mapboxgl.Map({
         container: 'map',
@@ -17,7 +17,7 @@ function init() {
         maxZoom: 18,
         hash: true,
         style: 'https://geoserveis.icgc.cat/contextmaps/icgc.json',
-        center: [1.88979,41.69589],
+        center: [1.88979, 41.69589],
         zoom: 13.61,
         attributionControl: false
     });
@@ -63,13 +63,14 @@ function init() {
             "source": "terrainMapZen",
             "type": "hillshade",
             "maxzoom": 13.5,
-            "layout": { "visibility": "visible" },
+            "layout": { "visibility": "none" },
             "paint": {
                 "hillshade-illumination-direction": styleTerrain.illumination,
                 "hillshade-exaggeration": styleTerrain.exaggeration,
                 "hillshade-shadow-color": styleTerrain.shadow,
                 "hillshade-highlight-color": styleTerrain.highlight,
-                "hillshade-accent-color": styleTerrain.accent
+                "hillshade-accent-color": styleTerrain.accent,
+                "hillshade-illumination-anchor": "map"
             }
         }, "landcover-glacier");
 
@@ -84,7 +85,8 @@ function init() {
                 "hillshade-exaggeration": styleTerrain.exaggeration,
                 "hillshade-shadow-color": styleTerrain.shadow,
                 "hillshade-highlight-color": styleTerrain.highlight,
-                "hillshade-accent-color": styleTerrain.accent
+                "hillshade-accent-color": styleTerrain.accent,
+                "hillshade-illumination-anchor": "map"
             }
         }, "landcover-glacier");
 
@@ -107,8 +109,15 @@ function init() {
         map.setPaintProperty('landcover-grass-copy', 'fill-opacity', 0.0);
         map.setPaintProperty('park-copy', 'fill-opacity', 0.0);
         map.setPaintProperty('background', 'background-color', styleTerrain.background);
-        
+
         //map.showTileBoundaries = true;
+
+
+        map.on("zoomend", function () {
+            if (map.getZoom() < 13) {
+                map.setLayoutProperty('hillshading2', 'visibility', "visible");
+            }
+        });
     });
 
 
@@ -153,7 +162,18 @@ function init() {
             show: true
         });
     });
-}
+
+    $('#bt_pitch').on('click', function () {
+        var pitch = parseInt(map.getPitch());
+        pitch == 60 ? pitch = 0 : pitch = pitch + 30;
+        map.easeTo({
+            'pitch': pitch
+        });
+
+    });
+    //}// end init
+
+});
 
 function setShadowColor(picker) {
 
@@ -244,7 +264,8 @@ function writeStyle() {
                     "hillshade-highlight-color": styleTerrain.highlight,
                     "hillshade-shadow-color": styleTerrain.shadow,
                     "hillshade-accent-color": styleTerrain.accent,
-                    "hillshade-illumination-direction": styleTerrain.illumination
+                    "hillshade-illumination-direction": styleTerrain.illumination,
+                    "hillshade-illumination-anchor": "map"
                 },
                 "interactive": true
             },
@@ -259,7 +280,8 @@ function writeStyle() {
                     "hillshade-highlight-color": styleTerrain.highlight,
                     "hillshade-shadow-color": styleTerrain.shadow,
                     "hillshade-accent-color": styleTerrain.accent,
-                    "hillshade-illumination-direction": styleTerrain.illumination
+                    "hillshade-illumination-direction": styleTerrain.illumination,
+                    "hillshade-illumination-anchor": "map"
                 },
                 "interactive": true
             }
